@@ -5,7 +5,7 @@ var beerApp = angular.module('Team43App', ['ngRoute']);
 beerApp.config(function($routeProvider, $locationProvider) {
   $routeProvider
 
-  .when('/home', {
+    .when('/home', {
     templateUrl: 'templates/map.html',
     controller: 'MapController',
     resolve: {
@@ -15,20 +15,32 @@ beerApp.config(function($routeProvider, $locationProvider) {
         $timeout(delay.resolve, 1000);
         return delay.promise;
       }
- 	}
-  })
-	.when('/feed', {
-	    templateUrl: 'templates/feed.html',
-	    controller: 'FeedController',
-	    resolve: {
-	      // I will cause a 1 second delay
-	      delay: function($q, $timeout) {
-	        var delay = $q.defer();
-	        $timeout(delay.resolve, 1000);
-	        return delay.promise;
-	      }
-	 	}
-	  })
+    }
+    })
+    .when('/feed', {
+        templateUrl: 'templates/feed.html',
+        controller: 'FeedController',
+        resolve: {
+          // I will cause a 1 second delay
+          delay: function($q, $timeout) {
+            var delay = $q.defer();
+            $timeout(delay.resolve, 1000);
+            return delay.promise;
+          }
+        }
+      })
+    .when('/form', {
+        templateUrl: 'templates/form.html',
+        controller: 'FormController',
+        resolve: {
+          // I will cause a 1 second delay
+          delay: function($q, $timeout) {
+            var delay = $q.defer();
+            $timeout(delay.resolve, 1000);
+            return delay.promise;
+          }
+        }
+      })
   .otherwise({
     redirectTo: '/home'
   });
@@ -65,6 +77,22 @@ beerApp.config(function($routeProvider, $locationProvider) {
 			return deferred.promise;
 		},
 	};
+}).factory('FormService', function($http, $q) {
+  	var baseURL = "/api/";
+
+  	return{
+  		getFormData: function(){
+  			var deferred = $q.defer();
+  			$http.get(baseURL + 'form/')
+  			.success(function(data, status, headers, config) {
+  				deferred.resolve(data);
+  			})
+  			.error(function() {
+  				deferred.reject("Failed to get Form Data");
+  			});
+  			return deferred.promise;
+  		},
+  	};
 }).controller('MapController', function($log, $scope, $route, $routeParams, $location, MapService) {
 
 	$scope.getMocks = function(){
@@ -92,6 +120,19 @@ beerApp.config(function($routeProvider, $locationProvider) {
 	}
 
 	$scope.feedData=$scope.getFeedData();
-});
+}).controller('FormController', function($log, $scope, $route, $routeParams, $location, FormService) {
+
+  	$scope.getMocks = function(){
+  		FormService.getFormData()
+  		.then(function(response) {
+  			$scope.formData = response;
+  			$log.info('Forms successfully retrieved to controller.');
+  		}).catch(function(error) {
+  			$log.error('Forms not successfully retrieved to controller.');
+  		});
+  	}
+
+  	$scope.formData=$scope.getFormData();
+  });
 
 
