@@ -37,14 +37,14 @@ beerApp.config(function($routeProvider, $locationProvider) {
 	var baseURL = "/api/";
 
 	return{
-		getMocks: function(){
+		getMapData: function(){
 			var deferred = $q.defer();
 			$http.get(baseURL + 'map/')
 			.success(function(data, status, headers, config) {
 				deferred.resolve(data);
 			})
 			.error(function() {
-				deferred.reject("Failed to get Maps");
+				deferred.reject("Failed to get Map Data");
 			});
 			return deferred.promise;
 		},
@@ -53,7 +53,7 @@ beerApp.config(function($routeProvider, $locationProvider) {
 	var baseURL = "/api/";
 
 	return{
-		getMocks: function(){
+		getFeedData: function(){
 			var deferred = $q.defer();
 			$http.get(baseURL + 'feed/')
 			.success(function(data, status, headers, config) {
@@ -68,30 +68,30 @@ beerApp.config(function($routeProvider, $locationProvider) {
 }).controller('MapController', function($log, $scope, $route, $routeParams, $location, MapService) {
 
 	$scope.getMocks = function(){
-		MapService.getMocks()
+		MapService.getMapData()
 		.then(function(response) {
-			$scope.map = response;
+			$scope.mapData = response;
 			$log.info('Map successfully retrieved to controller.');
 		}).catch(function(error) {
 			$log.error('Map not successfully retrieved to controller.');
 		});
 	}
 
-	$scope.mocks=$scope.getMocks();
+	$scope.mapData=$scope.getMapData();
 
 }).controller('FeedController', function($log, $scope, $route, $routeParams, $location, FeedService) {
 
 	$scope.getMocks = function(){
-		FeedService.getMocks()
+		FeedService.getFeedData()
 		.then(function(response) {
-			$scope.feeds = response;
+			$scope.feedData = response;
 			$log.info('Feeds successfully retrieved to controller.');
 		}).catch(function(error) {
 			$log.error('Feeds not successfully retrieved to controller.');
 		});
 	}
 
-	$scope.feeds=$scope.getMocks();
+	$scope.feedData=$scope.getFeedData();
 });
 
 

@@ -1,7 +1,5 @@
 package com.team43.rest;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,19 +8,19 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.team43.domain.MockData;
-import com.team43.service.MockService;
+import com.team43.domain.MapData;
+import com.team43.service.MapService;
 
-@Path("/mocks")
+@Path("/map")
 @Component
-public class MockResource {
+public class MapResource {
 
     @Autowired
-    private MockService mockService;
+    private MapService mapService;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<MockData> getMocks() {
-        return mockService.getMocks();
+    public MapData getMap() {
+        return mapService.getMap();
     }
 }

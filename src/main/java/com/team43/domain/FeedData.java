@@ -3,14 +3,14 @@ package com.team43.domain;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class MockData {
+public class FeedData {
     private String mockName;
 
-    public MockData() {
+    public FeedData() {
         super();
     }
 
-    public MockData(String mockName) {
+    public FeedData(String mockName) {
         super();
         this.mockName = mockName;
     }
