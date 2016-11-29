@@ -38,6 +38,16 @@ public class ESService {
         return array;
     }
 
+    public Tweet getTweet (String feedbackID) {
+        //String url = "https://search-hackathon43-hh6di4idan2fs35uldydhyhnyy.us-west-2.es.amazonaws.com/_search";
+        String url = "https://mmih9traja.execute-api.us-west-2.amazonaws.com/dev/tweet?feedbackID=" + feedbackID;
+
+        RestTemplate restTemplate = new RestTemplate();
+        String s = restTemplate.getForObject(url, String.class);
+
+        return null;
+    }
+
     public Tweet newTweet (String text) {
         Tweet tweet = new ESService.Tweet();
         tweet.text = text;
@@ -75,5 +85,9 @@ public class ESService {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class User {
         public String name;
+    }
+
+    public static class FeedbackTuple {
+        public String id;
     }
 }

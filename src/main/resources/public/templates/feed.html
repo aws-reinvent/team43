@@ -1,37 +1,37 @@
 <div class="text-center">
-    <h1>Feed</h1>
-    <div ng-repeat="item in feedData.tweets | limitTo:10">
-        <div style="border-style: solid; border-width: 2px; width: 600pt;margin: auto; background: white">
-            <table border="0" width="100%">
-                <tr>
-                    <td colspan="5" style="font-size: 15pt;font-family: Helvetica;font-weight: bold">Hi {{item.text}}</td>
-                </tr>
-                <tr>
-                    <td colspan="5"> <strong>{{item.user.name}}</strong> - {{item.dateString }} </td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <div ng-if="item.entities.media != null">
-                            <img style="padding-bottom: 10pt" width="500" src="{{ item.entities.media[0].media_url }}" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="20%" />
-                    <td>
-                        <img src="/images/ThumbsUp.png" height="30"/>
-                        <img src="/images/Spacer.gif" width="10"/>
-                        <img src="/images/CrossOut.png" height="30"/>
-                    </td>
-                    <td width="20%" />
-                </tr>
-                <tr>
-                    <td colspan="5" height="10"></td>
-                </tr>
-            </table>
-        </div>
-        <div style="height: 10px">
+        <h1>Feed</h1>
+        <div ng-repeat="item in feedData.tweets | limitTo:10">
+                <div style="border-style: solid; border-width: 2px; width: 600pt;margin: auto; background: white">
+                        <table border="0" width="100%">
+                                <tr>
+                                        <td colspan="5" style="font-size: 15pt;font-family: Helvetica;font-weight: bold">Hi {{item.text}}</td>
+                                </tr>
+                                <tr>
+                                        <td colspan="5"> <strong>{{item.user.name}}</strong> - {{item.dateString }} </td>
+                                </tr>
+                                <tr>
+                                        <td colspan="5">
+                                                <div ng-if="item.entities.media != null">
+                                                        <img style="padding-bottom: 10pt" width="500" src="{{ item.entities.media[0].media_url }}" />
+                                                </div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td width="20%" />
+                                        <td>
+                                                <img src="/images/ThumbsUp.png" height="30"/>
+                                                <img src="/images/Spacer.gif" width="10"/>
+                                                <img src="/images/CrossOut.png" height="30"/>
+                                        </td>
+                                        <td width="20%" />
+                                </tr>
+                                <tr>
+                                        <td colspan="5" height="10"></td>
+                                </tr>
+                        </table>
+                </div>
+                <div style="height: 10px">
 
+                </div>
         </div>
-    </div>
 </div>
