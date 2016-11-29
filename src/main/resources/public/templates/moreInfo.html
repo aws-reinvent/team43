@@ -1,9 +1,9 @@
 <div class="jumbotron text-center">
     <div class="container">
-        <form id="moreInfoForm" action="" method="post">
+        <form id="moreInfoForm" ng-submit="submit()" method="post">
             <h4>More Information</h4>
             <fieldset style="float: left">
-            {{moreInfoData.embedHtml}}
+            <h5>Embedded Tweet</h5>
             </fieldset>
             <fieldset style="float: left">
                 <h4>Tell us more!</h4>
@@ -12,7 +12,7 @@
                 <textarea class="form-control" rows="5" tabindex="2"></textarea>
             </fieldset>
             <fieldset style="float: left">
-                <button name="submit" type="submit" id="tweetSubmit" data-submit="...Sending">Submit</button>
+                <button name="submit" type="submit" id="tweetSubmit">Submit</button>
             </fieldset>
         </form>
     </div>

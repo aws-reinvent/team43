@@ -21,6 +21,10 @@ team3App.config(function($routeProvider, $locationProvider) {
         templateUrl: 'templates/moreInfo.html',
         controller: 'MoreInfoController'
       })
+      .when('/success', {
+        templateUrl: 'templates/success.html',
+        controller: 'MoreInfoController'
+      })
   .otherwise({
     redirectTo: '/home'
   });
@@ -64,7 +68,7 @@ team3App.config(function($routeProvider, $locationProvider) {
   	return{
   		getMoreInfoData: function(feedbackId){
   			var deferred = $q.defer();
-  			$http.get(baseURL + 'moreinfo/'+feedbackId)
+  			$http.get(baseURL + 'more-info/'+feedbackId)
   			//$http.get(baseURL+feedbackId)
   			.success(function(data, status, headers, config) {
   				deferred.resolve(data);
@@ -104,21 +108,27 @@ team3App.config(function($routeProvider, $locationProvider) {
 	$scope.feedData=$scope.getFeedData();
 }).controller('MoreInfoController', function($log, $scope, $route, $routeParams, $location, MoreInfoService) {
 
-	$scope.feedbackId = $routeParams.feedbackId;
+	//$scope.feedbackId = $routeParams.feedbackId;
 	
-	$log.info("feedbackId = " + $scope.feedbackId);
+	//$log.info("feedbackId = " + $scope.feedbackId);
 	
-  	$scope.getMoreInfoData = function(feedbackId){
-  		MoreInfoService.getMoreInfoData(feedbackId)
-  		.then(function(response) {
-  			$scope.moreInfoData = response;
-  			$log.info('Forms successfully retrieved to controller.');
-  		}).catch(function(error) {
-  			$log.error('Forms not successfully retrieved to controller.');
-  		});
-  	}
 	
-  	$scope.moreInfoData=$scope.getMoreInfoData($scope.feedbackId);
+	
+//  	$scope.getMoreInfoData = function(feedbackId){
+//  		MoreInfoService.getMoreInfoData(feedbackId)
+//  		.then(function(response) {
+//  			$scope.moreInfoData = response;
+//  			$log.info('Forms successfully retrieved to controller.');
+//  		}).catch(function(error) {
+//  			$log.error('Forms not successfully retrieved to controller.');
+//  		});
+//  	}
+	
+	$scope.submit = function() {
+		window.location = "#/success";
+      };
+	
+  	$scope.moreInfoData={"embeddedHtml":"Embedded Tweet"};
   });
 
 

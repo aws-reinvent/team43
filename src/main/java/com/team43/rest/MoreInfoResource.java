@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.team43.domain.MoreInfoData;
 import com.team43.service.MoreInfoService;
 
-@Path("/moreinfo")
+@Path("/more-info")
 @Component
 public class MoreInfoResource {
 
