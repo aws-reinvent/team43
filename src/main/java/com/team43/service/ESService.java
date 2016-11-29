@@ -38,6 +38,32 @@ public class ESService {
         return array;
     }
 
+    public Tweet getTweet (String feedbackID) {
+        //String url = "https://search-hackathon43-hh6di4idan2fs35uldydhyhnyy.us-west-2.es.amazonaws.com/_search";
+        String url = "https://mmih9traja.execute-api.us-west-2.amazonaws.com/dev/tweet?feedbackID=" + feedbackID;
+
+        RestTemplate restTemplate = new RestTemplate();
+        TweetArray array = restTemplate.getForObject(url, TweetArray.class);
+//        ESService.TweetArray array = new ESService.TweetArray();
+//        array.tweets = new ESService.Tweet[3];
+//        array.tweets[0] = newTweet("This is a tweet");
+//        array.tweets[1] = newTweet("This is a tweet also");
+//        array.tweets[2] = newTweet("This is another tweet");
+//
+//        array.tweets[2].entities = new Entities();
+//        array.tweets[2].entities.media = new Media[1];
+//        array.tweets[2].entities.media[0] = new Media();
+//        array.tweets[2].entities.media[0].media_url = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSerqVCwvA5BMXYCh8-5pYnXUp_yT8OxzJBjhWczHtLqU42mkWjsg";
+
+
+        for (Tweet tweet : array.tweets) {
+            if (tweet.timestamp_ms > 0) {
+                tweet.dateString = new Date(tweet.timestamp_ms).toString();
+            }
+        }
+        return null;
+    }
+
     public Tweet newTweet (String text) {
         Tweet tweet = new ESService.Tweet();
         tweet.text = text;
