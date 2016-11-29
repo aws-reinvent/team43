@@ -1,4 +1,17 @@
 <div class="jumbotron text-center">
         <h1>Team 43</h1>
         <p>Feed</p>
+        <div ng-repeat="item in feedData.tweets | limitTo:10">
+                <div style="border-style: solid; border-width: 1px; width: 200pt;margin: auto">
+                        <table border="1" width="100%">
+                                <tr>
+                                        <td colspan="2">Hi {{item.text}}</td>
+                                </tr>
+                                <tr>
+                                        <td><img src="/images/ThumbsUp.png" height="30"/></td>
+                                        <td width="100%" />
+                                </tr>
+                        </table>
+                </div>
+        </div>
 </div>

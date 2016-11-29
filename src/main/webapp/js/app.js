@@ -75,7 +75,7 @@ beerApp.config(function($routeProvider, $locationProvider) {
 				deferred.reject("Failed to get Feeds");
 			});
 			return deferred.promise;
-		},
+		}
 	};
 }).factory('FormService', function($http, $q) {
   	var baseURL = "/api/";
@@ -109,7 +109,7 @@ beerApp.config(function($routeProvider, $locationProvider) {
 
 }).controller('FeedController', function($log, $scope, $route, $routeParams, $location, FeedService) {
 
-	$scope.getMocks = function(){
+	$scope.getFeedData = function(){
 		FeedService.getFeedData()
 		.then(function(response) {
 			$scope.feedData = response;
