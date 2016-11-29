@@ -24,6 +24,12 @@ public class ESService {
         array.tweets[1] = newTweet("This is a tweet also");
         array.tweets[2] = newTweet("This is another tweet");
 
+        array.tweets[2].entities = new Entities();
+        array.tweets[2].entities.media = new Media[1];
+        array.tweets[2].entities.media[0] = new Media();
+        array.tweets[2].entities.media[0].media_url = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSerqVCwvA5BMXYCh8-5pYnXUp_yT8OxzJBjhWczHtLqU42mkWjsg";
+
+
         for (Tweet tweet : array.tweets) {
             if (tweet.date != null) {
                 tweet.dateString = tweet.date.toString();
@@ -51,5 +57,16 @@ public class ESService {
         public String username;
         public Date date;
         public String dateString;
+        public Entities entities;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Entities {
+        public Media [] media = null;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Media {
+        public String media_url;
     }
 }
