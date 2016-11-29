@@ -7,12 +7,12 @@
                     <td colspan="5" style="font-size: 15pt;font-family: Helvetica;font-weight: bold">Hi {{item.text}}</td>
                 </tr>
                 <tr>
-                    <td colspan="5"> <strong>{{item.username}}</strong> - {{item.dateString }} </td>
+                    <td colspan="5"> <strong>{{item.user.name}}</strong> - {{item.dateString }} </td>
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <div ng-if="item.entities != null">
-                            <img style="padding-bottom: 10pt" src="{{ item.entities.media[0].media_url }}" />
+                        <div ng-if="item.entities.media != null">
+                            <img style="padding-bottom: 10pt" width="500" src="{{ item.entities.media[0].media_url }}" />
                         </div>
                     </td>
                 </tr>

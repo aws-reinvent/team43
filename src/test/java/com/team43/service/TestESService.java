@@ -11,7 +11,9 @@ public class TestESService {
     public void testFetch () {
         ESService service = new ESService();
         ESService.TweetArray array = service.getTweets();
-        Assert.assertEquals(1, array.tweets.length);
-        Assert.assertEquals("This is a tweet", array.tweets[0].text);
+        Assert.assertEquals(10, array.tweets.length);
+
+        ESService.Tweet tweet = array.tweets[0];
+        Assert.assertNotNull(array.tweets[0].dateString);
     }
 }
