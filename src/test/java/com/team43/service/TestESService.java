@@ -20,7 +20,7 @@ public class TestESService {
     @Test
     public void testFetchTweet () {
         ESService service = new ESService();
-        service.getTweet("583cb0a3ae91a90001e386b0");
+        service.getTweet("583cf9bd1f4b7d0001108e05");
 
     }
 }

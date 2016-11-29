@@ -47,7 +47,7 @@ team3App.config(function($routeProvider, $locationProvider) {
 	return{
 		getFeedData: function(){
 			var deferred = $q.defer();
-			$http.get(baseURL + 'form/')
+			$http.get(baseURL + 'feed/')
 			.success(function(data, status, headers, config) {
 				deferred.resolve(data);
 			})
