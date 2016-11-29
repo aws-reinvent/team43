@@ -43,24 +43,8 @@ public class ESService {
         String url = "https://mmih9traja.execute-api.us-west-2.amazonaws.com/dev/tweet?feedbackID=" + feedbackID;
 
         RestTemplate restTemplate = new RestTemplate();
-        TweetArray array = restTemplate.getForObject(url, TweetArray.class);
-//        ESService.TweetArray array = new ESService.TweetArray();
-//        array.tweets = new ESService.Tweet[3];
-//        array.tweets[0] = newTweet("This is a tweet");
-//        array.tweets[1] = newTweet("This is a tweet also");
-//        array.tweets[2] = newTweet("This is another tweet");
-//
-//        array.tweets[2].entities = new Entities();
-//        array.tweets[2].entities.media = new Media[1];
-//        array.tweets[2].entities.media[0] = new Media();
-//        array.tweets[2].entities.media[0].media_url = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSerqVCwvA5BMXYCh8-5pYnXUp_yT8OxzJBjhWczHtLqU42mkWjsg";
+        String s = restTemplate.getForObject(url, String.class);
 
-
-        for (Tweet tweet : array.tweets) {
-            if (tweet.timestamp_ms > 0) {
-                tweet.dateString = new Date(tweet.timestamp_ms).toString();
-            }
-        }
         return null;
     }
 
@@ -101,5 +85,9 @@ public class ESService {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class User {
         public String name;
+    }
+
+    public static class FeedbackTuple {
+        public String id;
     }
 }
