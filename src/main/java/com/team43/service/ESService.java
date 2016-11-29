@@ -43,9 +43,15 @@ public class ESService {
         String url = "https://mmih9traja.execute-api.us-west-2.amazonaws.com/dev/tweet?feedbackID=" + feedbackID;
 
         RestTemplate restTemplate = new RestTemplate();
-        String s = restTemplate.getForObject(url, String.class);
+        FeedbackTuple tuple = restTemplate.getForObject(url, FeedbackTuple.class);
 
-        return null;
+        System.out.println("Tuple: " + tuple.tweetId);
+
+        String twitterUrl = "https://api.twitter.com/1.1/statuses/show.json?id=" + tuple.tweetId;
+        RestTemplate twitterTemplate = new RestTemplate();
+        Tweet tweet = twitterTemplate.getForObject(twitterUrl, Tweet.class);
+
+        return tweet;
     }
 
     public Tweet newTweet (String text) {
@@ -88,6 +94,6 @@ public class ESService {
     }
 
     public static class FeedbackTuple {
-        public String id;
+        public String tweetId;
     }
 }
