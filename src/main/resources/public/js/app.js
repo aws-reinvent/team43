@@ -47,7 +47,7 @@ team3App.config(function($routeProvider, $locationProvider) {
 	return{
 		getFeedData: function(){
 			var deferred = $q.defer();
-			$http.get(baseURL + 'form/')
+			$http.get(baseURL + 'feed/')
 			.success(function(data, status, headers, config) {
 				deferred.resolve(data);
 			})
@@ -59,11 +59,13 @@ team3App.config(function($routeProvider, $locationProvider) {
 	};
 }).factory('MoreInfoService', function($http, $q, $location) {
   	var baseURL = "/api/";
+  	//var baseURL = "https://mmih9traja.execute-api.us-west-2.amazonaws.com/dev/tweet?feedbackID="
 
   	return{
   		getMoreInfoData: function(feedbackId){
   			var deferred = $q.defer();
-  			$http.get(baseURL + 'tweet/'+feedbackId)
+  			$http.get(baseURL + 'moreinfo/'+feedbackId)
+  			//$http.get(baseURL+feedbackId)
   			.success(function(data, status, headers, config) {
   				deferred.resolve(data);
   			})
@@ -104,7 +106,9 @@ team3App.config(function($routeProvider, $locationProvider) {
 
 	$scope.feedbackId = $routeParams.feedbackId;
 	
-  	$scope.getMoreInfoData = function(){
+	$log.info("feedbackId = " + $scope.feedbackId);
+	
+  	$scope.getMoreInfoData = function(feedbackId){
   		MoreInfoService.getMoreInfoData(feedbackId)
   		.then(function(response) {
   			$scope.moreInfoData = response;
@@ -114,7 +118,7 @@ team3App.config(function($routeProvider, $locationProvider) {
   		});
   	}
 	
-  	$scope.moreInfoData=$scope.getMoreInfoData
+  	$scope.moreInfoData=$scope.getMoreInfoData($scope.feedbackId);
   });
 
 
