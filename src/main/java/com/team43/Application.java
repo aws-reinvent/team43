@@ -5,6 +5,7 @@ import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -12,10 +13,11 @@ import com.team43.config.JerseyConfig;
 
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.team43"})
-public class Application {
 
-    public static void main(String[] args) throws Exception {
-        new SpringApplicationBuilder(Application.class).showBanner(false).run(args);
+public class Application extends SpringBootServletInitializer {
+
+    public static void main(String[] args) {
+        new Application().configure(new SpringApplicationBuilder(Application.class)).run(args);
     }
 
     @Bean
