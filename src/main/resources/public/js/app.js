@@ -1,8 +1,8 @@
 'use strict';
 
-var beerApp = angular.module('Team43App', ['ngRoute']);
+var team3App = angular.module('Team43App', ['ngRoute']);
 
-beerApp.config(function($routeProvider, $locationProvider) {
+team3App.config(function($routeProvider, $locationProvider) {
   $routeProvider
 
     .when('/home', {
@@ -13,9 +13,13 @@ beerApp.config(function($routeProvider, $locationProvider) {
         templateUrl: 'templates/feed.html',
         controller: 'FeedController'
       })
-    .when('/form', {
+      .when('/form', {
         templateUrl: 'templates/form.html',
-        controller: 'FormController'
+        controller: 'FeedController'
+      })
+      .when('/more-info/:feedbackId', {
+        templateUrl: 'templates/moreInfo.html',
+        controller: 'MoreInfoController'
       })
   .otherwise({
     redirectTo: '/home'
@@ -43,7 +47,7 @@ beerApp.config(function($routeProvider, $locationProvider) {
 	return{
 		getFeedData: function(){
 			var deferred = $q.defer();
-			$http.get(baseURL + 'feed/')
+			$http.get(baseURL + 'form/')
 			.success(function(data, status, headers, config) {
 				deferred.resolve(data);
 			})
@@ -53,13 +57,13 @@ beerApp.config(function($routeProvider, $locationProvider) {
 			return deferred.promise;
 		},
 	};
-}).factory('FormService', function($http, $q) {
+}).factory('MoreInfoService', function($http, $q, $location) {
   	var baseURL = "/api/";
 
   	return{
-  		getFormData: function(){
+  		getMoreInfoData: function(feedbackId){
   			var deferred = $q.defer();
-  			$http.get(baseURL + 'form/')
+  			$http.get(baseURL + 'tweet/'+feedbackId)
   			.success(function(data, status, headers, config) {
   				deferred.resolve(data);
   			})
@@ -71,21 +75,21 @@ beerApp.config(function($routeProvider, $locationProvider) {
   	};
 }).controller('MapController', function($log, $scope, $route, $routeParams, $location, MapService) {
 
-	$scope.getMocks = function(){
-		MapService.getMapData()
-		.then(function(response) {
-			$scope.mapData = response;
-			$log.info('Map successfully retrieved to controller.');
-		}).catch(function(error) {
-			$log.error('Map not successfully retrieved to controller.');
-		});
-	}
+//	$scope.getMocks = function(){
+//		MapService.getMapData()
+//		.then(function(response) {
+//			$scope.mapData = response;
+//			$log.info('Map successfully retrieved to controller.');
+//		}).catch(function(error) {
+//			$log.error('Map not successfully retrieved to controller.');
+//		});
+//	}
 
-	$scope.mapData=$scope.getMapData();
+	$scope.mapData={"data":"test"};
 
 }).controller('FeedController', function($log, $scope, $route, $routeParams, $location, FeedService) {
 
-	$scope.getMocks = function(){
+	$scope.getFeedData = function(){
 		FeedService.getFeedData()
 		.then(function(response) {
 			$scope.feedData = response;
@@ -96,19 +100,21 @@ beerApp.config(function($routeProvider, $locationProvider) {
 	}
 
 	$scope.feedData=$scope.getFeedData();
-}).controller('FormController', function($log, $scope, $route, $routeParams, $location, FormService) {
+}).controller('MoreInfoController', function($log, $scope, $route, $routeParams, $location, MoreInfoService) {
 
-  	$scope.getMocks = function(){
-  		FormService.getFormData()
+	$scope.feedbackId = $routeParams.feedbackId;
+	
+  	$scope.getMoreInfoData = function(){
+  		MoreInfoService.getMoreInfoData(feedbackId)
   		.then(function(response) {
-  			$scope.formData = response;
+  			$scope.moreInfoData = response;
   			$log.info('Forms successfully retrieved to controller.');
   		}).catch(function(error) {
   			$log.error('Forms not successfully retrieved to controller.');
   		});
   	}
-
-  	$scope.formData=$scope.getFormData();
+	
+  	$scope.moreInfoData=$scope.getMoreInfoData
   });
 
 
